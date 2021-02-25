@@ -1,5 +1,5 @@
-# dwin-ico-tools
-Tools to process DWIN LCD display .ICO files.
+# DWIN ICO Tool
+Tool to process DWIN LCD display .ICO files. This is the C# .NET version of the [original](https://github.com/b-pub/dwin-ico-tools) by Brent Burton [[@b-pub](https://github.com/b-pub)].
 
 ## What
 
@@ -10,44 +10,51 @@ configuration files to support these displays is included in the
 [Marlin firmware](https://github.com/MarlinFirmware/Marlin).
 
 One file they use is "9.ICO", which is a structured file
-containing the icons. This project contains two tools to help
-developers manipulate these ICO files.
+containing the icons.
 
-## The Tools
+## How-To
+##### Extracting the images
+There are two ways at the moment:
+* Drag and drop the "9.ICO" to the executable file
+* Or pass the file ("9.ICO") as an argument in the command line
 
-dwin-ico-tools consists of two tools: splitIco and makeIco.
+A "out" folder will be created with all the images in the form of ```INDEX_NAME.jpg```
+See the [dwin.h file](https://github.com/MarlinFirmware/Marlin/blob/2.0.x/Marlin/src/lcd/dwin/e3v2/dwin.h#L103) from Marlin for their indices and names.
 
-### splitIco.py
+##### Making a .ICO
+Same as extracting the images:
+* Drag and drop the "out" folder to the executable file
+* Or pass the folder ("out") as an argument in the command line
 
-"splitIco.py" reads an ICO file, and extracts the component icon
-images, saving each into a new directory. Each icon is named by
-its index in the ICO, and is named using symbol names from the
-Marlin dwin.h header file for this display.
+An "out.ICO" file will be created.
 
-### makeIco.py
+## Examples
+Using powershell:
+1. Assuming 9.ico is the file:
+ ```.\DwinIcoTool.exe 9.ico```
 
-"makeIco.py" is the inverse: it reads the images from a
-directory, and combines them to create a valid .ICO file.
+2. Assuming "out" is the folder containing all the images:
+ ```.\DwinIcoTool.exe out```
 
 ## Dependencies
 
-The dwin-ico-tools are written in Python 3, and use the
-[Pillow image library](https://pillow.readthedocs.io/en/latest/index.html).
+* .NET Framework 4
 
-## Versioning
+This should work on Windows 10 out of the box (Tested on Windows Sandbox).
 
-This is a new project and I don't forsee having a strict
-versioning in the tools.
+## Test
+I tested this with the [9.ICO](https://github.com/MarlinFirmware/Configurations/tree/release-2.0.6/config/examples/Creality/Ender-3%20V2/DWIN_SET) file from Marlin configuration examples for the Creality Ender 3 V2.
+Extracting the images and redoing the .ico file without modifying produces the same file as the original.
 
-That said, the tools correspond the the DWIN image and
-header files included in Marlin 2.0.7, as of 1-oct-2020.
+I DID NOT TEST FLASHING A MODIFIED ONE.
 
 ## Credits
 
-These tools were created by:
+The original tools were created by:
 * Brent Burton [[@b-pub](https://github.com/b-pub)]
 
 ## License
 
 dwin-ico-tools is published under the GPL 3 license. See
 the LICENSE file for details.
+DwinIcoTool uses the same as this is a fork.
